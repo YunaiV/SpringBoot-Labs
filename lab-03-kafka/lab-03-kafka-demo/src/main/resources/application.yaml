@@ -1,7 +1,7 @@
 spring:
   # Kafka 配置项，对应 KafkaProperties 配置类
   kafka:
-    bootstrap-servers: 127.0.0.1:9092 # 指定 Kafka Broker 地址，可以设置多个，以逗号分隔
+    bootstrap-servers: 192.168.1.119:9092,192.168.1.120:9092,192.168.1.121:9092 # 指定 Kafka Broker 地址，可以设置多个，以逗号分隔
     # Kafka Producer 配置项
     producer:
       acks: 1 # 0-不应答。1-leader 应答。all-所有 leader 和 follower 应答。

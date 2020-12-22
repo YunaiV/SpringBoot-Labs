@@ -29,8 +29,11 @@ public class Demo13Producer {
             @Override
             public Object doInRabbit(RabbitOperations operations) {
                 // 同步发送消息
-                operations.convertAndSend(Demo13Message.EXCHANGE, Demo13Message.ROUTING_KEY, message);
+                for (int i = 0; i < 10; i++) {
+                    operations.convertAndSend(Demo13Message.EXCHANGE, Demo13Message.ROUTING_KEY, message);
+                }
                 logger.info("[doInRabbit][发送消息完成]");
+
                 // 等待确认
                 operations.waitForConfirms(0); // timeout 参数，如果传递 0 ，表示无限等待
                 logger.info("[doInRabbit][等待 Confirm 完成]");
@@ -41,6 +44,7 @@ public class Demo13Producer {
 
             @Override
             public void handle(long deliveryTag, boolean multiple) throws IOException {
+                System.out.println("deliveryTag:" + "  multiple:" + multiple);
                 logger.info("[handle][Confirm 成功]");
             }
 
@@ -48,11 +52,10 @@ public class Demo13Producer {
 
             @Override
             public void handle(long deliveryTag, boolean multiple) throws IOException {
+                System.out.println("deliveryTag:" + "  multiple:" + multiple);
                 logger.info("[handle][Confirm 失败]");
             }
 
         });
-
     }
-
 }

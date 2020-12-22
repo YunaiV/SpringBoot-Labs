@@ -5,7 +5,7 @@ package cn.iocoder.springboot.lab03.kafkademo.message;
  */
 public class Demo01Message {
 
-    public static final String TOPIC = "DEMO_01";
+    public static final String TOPIC = "test1";
 
     /**
      * 编号

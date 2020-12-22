@@ -21,24 +21,38 @@ public class PipelineTest {
 
     @Test
     public void test01() {
-        List<Object> results = stringRedisTemplate.executePipelined(new RedisCallback<Object>() {
-
-            @Override
-            public Object doInRedis(RedisConnection connection) throws DataAccessException {
-                // set 写入
-                for (int i = 0; i < 3; i++) {
-                    connection.set(String.format("yunai:%d", i).getBytes(), "shuai".getBytes());
-                }
-
-                // get
-                for (int i = 0; i < 3; i++) {
-                    connection.get(String.format("yunai:%d", i).getBytes());
-                }
-
-                // 返回 null 即可
-                return null;
+        RedisCallback<Object> redisCallback = connection -> {
+            // set 写入
+            for (int i = 0; i < 3; i++) {
+                connection.set(String.format("yunai:%d", i).getBytes(), "shuai".getBytes());
             }
-        });
+
+            // get
+            for (int i = 0; i < 3; i++) {
+                connection.get(String.format("yunai:%d", i).getBytes());
+            }
+
+            // 返回 null 即可
+            return null;
+        };
+
+
+//        List<Object> results = stringRedisTemplate.executePipelined((RedisCallback<Object>) connection -> {
+//            // set 写入
+//            for (int i = 0; i < 3; i++) {
+//                connection.set(String.format("yunai:%d", i).getBytes(), "shuai".getBytes());
+//            }
+//
+//            // get
+//            for (int i = 0; i < 3; i++) {
+//                connection.get(String.format("yunai:%d", i).getBytes());
+//            }
+//
+//            // 返回 null 即可
+//            return null;
+//        });
+        System.out.println(redisCallback.hashCode());
+        List<Object> results = stringRedisTemplate.executePipelined(redisCallback);
 
         // 打印结果
         System.out.println(results);

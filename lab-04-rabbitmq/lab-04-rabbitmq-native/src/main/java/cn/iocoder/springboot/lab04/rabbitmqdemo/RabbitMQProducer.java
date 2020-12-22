@@ -10,7 +10,7 @@ import java.util.concurrent.TimeoutException;
 
 public class RabbitMQProducer {
 
-    private static final String IP_ADDRESS = "127.0.0.1";
+    private static final String IP_ADDRESS = "192.168.1.121";
     private static final Integer PORT = 5672;
     private static final String USERNAME = "guest";
     private static final String PASSWORD = "guest";
@@ -30,7 +30,7 @@ public class RabbitMQProducer {
         initExchangeAndQueue(channel);
 
         // 发送 3 条消息
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 10; i++) {
             String message = "Hello World" + i;
             channel.basicPublish(EXCHANGE_NAME, ROUTING_KEY, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes());
         }

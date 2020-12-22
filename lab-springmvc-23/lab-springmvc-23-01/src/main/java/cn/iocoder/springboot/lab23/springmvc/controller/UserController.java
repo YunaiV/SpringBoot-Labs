@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户 Controller
@@ -88,6 +89,27 @@ public class UserController {
         Boolean success = true;
         // 返回更新是否成功
         return success;
+    }
+
+    @PostMapping("/{id}")
+    public Boolean save(@PathVariable("id") Integer id, Map<String,Integer> map){
+        System.out.println(map);
+        System.err.println("=================");
+        System.err.println("=================");
+        System.err.println("=================");
+        System.out.println(id);
+        return true;
+    }
+
+    @PostMapping("/test1")
+    public Boolean save1(Integer id,String name){
+        System.out.println(name);
+        System.out.println("=================");
+        System.out.println("hello world");
+        System.out.println("=================");
+        System.out.println("=================");
+        System.out.println(id);
+        return true;
     }
 
     /**

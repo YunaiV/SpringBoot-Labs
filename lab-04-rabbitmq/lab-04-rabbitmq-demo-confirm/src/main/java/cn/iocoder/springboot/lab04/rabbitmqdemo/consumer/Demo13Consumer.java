@@ -17,5 +17,4 @@ public class Demo13Consumer {
     public void onMessage(Demo13Message message) {
         logger.info("[onMessage][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), message);
     }
-
 }

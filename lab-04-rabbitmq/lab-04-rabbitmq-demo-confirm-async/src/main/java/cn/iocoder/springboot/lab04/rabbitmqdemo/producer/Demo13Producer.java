@@ -26,5 +26,4 @@ public class Demo13Producer {
         // 同步发送消息
         rabbitTemplate.convertAndSend(Demo13Message.EXCHANGE, "error", message);
     }
-
 }
